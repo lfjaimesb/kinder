@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="http://localhost/sic/" />
+    <title>Sistema Integral Contable &raquo; Arqueum</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/loading-bar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/select.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+
+</head>
+<body ng-app="SicApp">
+    <script type="text/ng-template" id="PopoverEmpresa.html">
+        <p style="font-size:12px; margin-bottom:5px;">
+            <strong>Nombre:</strong> {{ empresa.nombre }}
+        </p>
+        <p style="font-size:12px; margin-bottom:5px;">
+            <strong>Regimen:</strong> {{ empresa.regimen.regimen }}
+        </p>
+        <p style="font-size:12px; margin-bottom:0px;"><strong>Usuario:</strong> {{ usuario.usuario }}</p>
+    </script>
+    <div class="noti">
+        <uib-alert  ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="10500">
+            {{alert.msg}}
+            <uib-progressbar class="progress-striped active" value="alert.val" type="alert.type" ></uib-progressbar>
+        </uib-alert>
+    </div>
+    <div class="container-fluid">
+        <div class="col-sm-12" ng-controller='MenuCtrl' style="z-index:200;">
+            <div id="nv-home" class="ng-hide" ng-show="swMenu">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                                <span class="sr-only">Toggle Navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand">
+                                <img src="img/logos/{{ empresa.logo }}" class="img-responsive img-thumbnail img-shw" uib-popover-template="'PopoverEmpresa.html'"  popover-placement="right" popover-trigger="mouseenter" />
+                            </a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="navbar-menu">
+                            <ul class="nav navbar-nav">
+                                <li ng-class="navClass('{{menu.link}}')" ng-repeat="menu in menus">
+                                    <a ng-click="navAction(menu.link)">
+                                        <img src="img/iconos/{{ menu.icono }}" />
+                                        <span>{{ menu.titulo }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div id="sub-hd">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 page transition" ng-view></div>
+    </div>
+
+    <footer class="container-fluid navbar-fixed-bottom" ng-controller="windowsCtrl">
+        <ul id="dock">
+            <li ng-repeat="window in windows" ng-class="{active: window.select}" ng-click="navAction(window.link)" >
+                <img src="img/iconos/{{ window.icono }}" class="img-responsive" />
+            </li>
+        </ul>
+    </footer>
+
+    <script src="lib/angular.js"></script>
+    <script src="lib/angular-locale_es-mx.js"></script>
+    <script src="lib/angular-animate.js"></script>
+    <script src="lib/angular-route.js"></script>
+    <script src="lib/angular-sanitize.js"></script>
+    <script src="lib/ngStorage.js"></script>
+    <script src="lib/ui-bootstrap-tpls.js"></script>
+    <script src="lib/loading-bar.js"></script>
+    <script src="lib/select.js"></script>
+    <script src="lib/mask.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/servicios.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/load.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/empresas.js"></script>
+    <script src="js/cuentas.js"></script>
+    <script src="js/polizas.js"></script>
+</body>
+</html>
